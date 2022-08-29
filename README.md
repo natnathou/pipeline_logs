@@ -11,6 +11,19 @@ This app is a pipeline that has two functionality:
  - get some logs from queue (kafka), and save them in database (elastic search), 
  - search logs by some text
  
+Why we choose queue rather than http?
+If our server offline, we lose the message, but with queue the message will still be in the queue until we acknowledge the pull
+
+Why we use Kafka rather than pub/sub?
+ - Kafka is open source
+ - Kafka can implement schema registry
+ - Kafka work with partition and parallelization works better
+ - Kafka has retention process for messages, in contrasts with pub when we acknowledge the message, it goes
+ 
+ Why we choose Elasticsearch:
+  - Elasticsearch is no-sql so it is perfect for storing unstructured data
+  - Elasticsearch is very powerfull for search, and is very powerfull for data analyse so it's perfect for logs
+ But Mongo could be also a good choise
 
 
 ## Installation
