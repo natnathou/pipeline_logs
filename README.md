@@ -55,7 +55,7 @@ Kafka:
 - if we want to get the correct scale we have to run load test and increase the number of partition in function of the load test result
 
 Nestjs:
-- we can deploy our server via kubernetes, and choose the right config for HorizontalPodAutoscaler, so we can increase our pod instance in function of cpu or memory utilisation
+- we can deploy our server via kubernetes, and choose the right config for HorizontalPodAutoscaler, so we can increase our pod instances in function of cpu or memory utilisation
 
 Elasticsearch:
 - about elasticsearch we could use a managed database
