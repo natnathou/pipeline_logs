@@ -8,8 +8,8 @@
 ## Description
 
 This app is a pipeline that has two functionalities:
- - get some logs from a queue (kafka), and save them in database (elastic search), 
- - search logs by some text
+ - to get some logs from a queue (kafka), and save them in database (elastic search), 
+ - to search logs by some text
  
 Why do I choose queue rather than http for logs injection?
 If our server is offline, we lose the messages, but with queue the messages will still be in the queue until we acknowledge them
