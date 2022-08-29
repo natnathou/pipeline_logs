@@ -20,7 +20,7 @@ Why do I use Kafka rather than pub/sub?<br/>
  - Kafka work with partitions and parallelization works better
  - Kafka has retention process for messages, in contrasts with pub/sub when we acknowledge the message, it goes
  
- Why I choose Elasticsearch:<br/>
+ Why do I choose Elasticsearch:<br/>
   - Elasticsearch is no-sql, so it is perfect for storing unstructured data
   - Elasticsearch is very powerfully for search, and very powerfully for data analyse, so it's perfect for logs
  But Mongo could be also a good choice
