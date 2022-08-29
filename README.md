@@ -8,22 +8,25 @@
 ## Description
 
 This app is a pipeline that has two functionalities:
- - get some logs from queue (kafka), and save them in database (elastic search), 
+ - get some logs from a queue (kafka), and save them in database (elastic search), 
  - search logs by some text
  
-Why I choose queue rather than http for logs injection?
+Why do I choose queue rather than http for logs injection?
 If our server is offline, we lose the messages, but with queue the messages will still be in the queue until we acknowledge them
 
-Why I use Kafka rather than pub/sub?
+Why do I use Kafka rather than pub/sub?
  - Kafka is open source
  - Kafka can implement schema registry
  - Kafka work with partitions and parallelization works better
  - Kafka has retention process for messages, in contrasts with pub/sub when we acknowledge the message, it goes
  
  Why I choose Elasticsearch:
-  - Elasticsearch is no-sql so it is perfect for storing unstructured data
-  - Elasticsearch is very powerfull for search, and very powerfull for data analyse so it's perfect for logs
- But Mongo could be also a good choise
+  - Elasticsearch is no-sql, so it is perfect for storing unstructured data
+  - Elasticsearch is very powerfully for search, and very powerfully for data analyse, so it's perfect for logs
+ But Mongo could be also a good choice
+
+About support multi databases:
+It yes supports multi databases, we just have to inject a class dbService in LogProvider that satisfy the interface 'DbServiceInterface'
 
 
 ## Installation
@@ -40,7 +43,7 @@ Be careful to increase your memory in docker desktop up to 4Gb to avoid crashing
 docker compose up --build
 ```
 ## Postman
-You can import logs.postman_collection.json (from root project ) to postman to test this server
+You can import logs.postman_collection.json (from root project) to postman to test this server
 
 ## Note
 I Implemented a producer for kafka just for the dev, so you have a way to produce message to kafka easily
@@ -52,7 +55,7 @@ I Implemented a producer for kafka just for the dev, so you have a way to produc
 
 ## Scalability
 Kafka:
-- if we want to get the correct scale we have to run load test and increase the number of partition in function of the load test result
+- if we want to get the correct scale, we have to run load test and increase the number of partition in function of the load test result
 
 Nestjs:
 - we can deploy our server via kubernetes, and choose the right config for HorizontalPodAutoscaler, so we can increase our pod instances in function of cpu or memory utilisation
