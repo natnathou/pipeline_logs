@@ -12,21 +12,13 @@
 ## Installation
 
 ```bash
-$ npm install
+$ npm ci
 ```
-
+## Description
+Be careful to increase your memory in docker desktop up to 4Gb to avoid elastic search container to crash
 ## Running the app
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
+docker compose up --build
 
 ## Architecture Design
 
