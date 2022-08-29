@@ -18,7 +18,7 @@ Why I use Kafka rather than pub/sub?
  - Kafka is open source
  - Kafka can implement schema registry
  - Kafka work with partitions and parallelization works better
- - Kafka has retention process for messages, in contrasts with pub when we acknowledge the message, it goes
+ - Kafka has retention process for messages, in contrasts with pub/sub when we acknowledge the message, it goes
  
  Why I choose Elasticsearch:
   - Elasticsearch is no-sql so it is perfect for storing unstructured data
