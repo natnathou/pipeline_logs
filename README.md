@@ -54,13 +54,13 @@ I Implemented a producer for kafka just for the dev, so you have a way to produc
 ![image](https://user-images.githubusercontent.com/42219511/187194566-ba5faeb2-8671-4c04-bb95-5eaa86c81da8.png)
 
 ## Scalability
-Kafka:
+Kafka:<br/>
 - if we want to get the correct scale, we have to run load test and increase the number of partition in function of the load test result
 
-Nestjs:
+Nestjs:<br/>
 - we can deploy our server via kubernetes, and choose the right config for HorizontalPodAutoscaler, so we can increase our pod instances in function of cpu or memory utilisation
 
-Elasticsearch:
+Elasticsearch:<br/>
 - about elasticsearch we could use a managed database
 
 
