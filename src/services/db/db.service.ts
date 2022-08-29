@@ -4,6 +4,7 @@ import { LogBody } from '@services/db/interfaces/log-body';
 import { getErrorMessage } from '@src/shared/utils';
 import { Entity, SearchReturn } from '@services/db/interfaces';
 import { DbServiceInterface } from '@services/db/interfaces/db-service-interface';
+import { SearchTotalHits } from '@elastic/elasticsearch/lib/api/types';
 
 @Injectable()
 export class DbService implements DbServiceInterface {
@@ -48,8 +49,11 @@ export class DbService implements DbServiceInterface {
                     },
                 },
             });
+
+            const searchTotalHits = response?.hits?.total as SearchTotalHits;
+
             const data: SearchReturn = {
-                total: response?.hits?.total as number,
+                total: searchTotalHits?.value,
                 result: response?.hits?.hits?.map((h) => {
                     return {
                         _id: h._id,
