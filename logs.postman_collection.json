@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "9c6c54bb-2f46-46a5-b1a6-8b2f816820d3",
+		"name": "logs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17334073"
+	},
+	"item": [
+		{
+			"name": "search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/logs/some-input",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"logs",
+						"some-input"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save logs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"functionName\": \"prov\",\n  \"message\": \"genial\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/producer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
