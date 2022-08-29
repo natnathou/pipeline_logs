@@ -49,8 +49,7 @@ I Implemented a producer for kafka just for the dev, so you have a way to produc
 
 ![image](https://user-images.githubusercontent.com/42219511/187194427-1f8f44ec-197d-4cca-86b6-1baf535ebf12.png)
 ![image](https://user-images.githubusercontent.com/42219511/187194566-ba5faeb2-8671-4c04-bb95-5eaa86c81da8.png)
-![image](https://user-images.githubusercontent.com/42219511/187219463-bf7dd8d7-3f7f-49be-bd09-720a3d712a63.png)
-
+![image](https://user-images.githubusercontent.com/42219511/187224868-a794b68e-decc-496c-9aad-84a4f5d7e4ef.png)
 
 ## Scalability
 Kafka:
