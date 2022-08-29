@@ -31,5 +31,6 @@ $ npm run start:prod
 ## Architecture Design
 
 ![image](https://user-images.githubusercontent.com/42219511/187194427-1f8f44ec-197d-4cca-86b6-1baf535ebf12.png)
+![image](https://user-images.githubusercontent.com/42219511/187194566-ba5faeb2-8671-4c04-bb95-5eaa86c81da8.png)
 
 
