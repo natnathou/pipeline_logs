@@ -7,7 +7,11 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This app is a pipeline that has two functionality:
+ - get some logs from queue (kafka), and save them in database (elastic search), 
+ - search logs by some text
+ 
+
 
 ## Installation
 No installation is needed if you're running the app via docker if not you can run:
