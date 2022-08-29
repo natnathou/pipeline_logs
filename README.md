@@ -43,7 +43,7 @@ Be careful to increase your memory in docker desktop up to 4Gb to avoid crashing
 docker compose up --build
 ```
 
-## stop the app and remove container
+## Stop the app and remove container
 ```bash
 docker compose down
 docker system prune -f
