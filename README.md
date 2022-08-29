@@ -14,13 +14,13 @@ This app is a pipeline that has two functionality:
 Why we choose queue rather than http?
 If our server offline, we lose the message, but with queue the message will still be in the queue until we acknowledge the pull
 
-Why we use Kafka rather than pub/sub?
+Why I use Kafka rather than pub/sub?
  - Kafka is open source
  - Kafka can implement schema registry
  - Kafka work with partition and parallelization works better
  - Kafka has retention process for messages, in contrasts with pub when we acknowledge the message, it goes
  
- Why we choose Elasticsearch:
+ Why I choose Elasticsearch:
   - Elasticsearch is no-sql so it is perfect for storing unstructured data
   - Elasticsearch is very powerfull for search, and is very powerfull for data analyse so it's perfect for logs
  But Mongo could be also a good choise
@@ -39,6 +39,11 @@ Be careful to increase your memory in docker desktop up to 4Gb to avoid elastic 
 ```bash
 docker compose up --build
 ```
+## Postman
+You can import logs.postman_collection.json (in root project ) to postman to test this server
+
+## Note
+I Implemented a producer for kafka just for the dev, so you have a way to produce message to kafka easily
 
 ## Architecture Design
 
