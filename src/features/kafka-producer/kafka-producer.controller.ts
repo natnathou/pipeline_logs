@@ -7,7 +7,7 @@ export class KafkaProducerController {
     constructor(private readonly kafkaProducerService: KafkaProducerService) {}
 
     @Post()
-    async send(@Body() body: SendLogRequestDto): Promise<any> {
-        return await this.kafkaProducerService.send(body);
+    send(@Body() body: SendLogRequestDto): Promise<any> {
+        return this.kafkaProducerService.send(body);
     }
 }
