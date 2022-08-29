@@ -283,7 +283,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>send(data: <a href="../classes/LogDto.html" target="_self">LogDto</a>)</code>
+                    <code>send(data: <a href="../classes/SendLogRequestDto.html" target="_self">SendLogRequestDto</a>)</code>
                 </td>
             </tr>
 
@@ -314,7 +314,7 @@
                                 <tr>
                                     <td>data</td>
                                     <td>
-                                                <code><a href="../classes/LogDto.html" target="_self" >LogDto</a></code>
+                                                <code><a href="../classes/SendLogRequestDto.html" target="_self" >SendLogRequestDto</a></code>
                                     </td>
 
                                     <td>
@@ -410,8 +410,8 @@ import { Producer, RecordMetadata } from &#x27;kafkajs&#x27;;
 import { KafkaClientService } from &#x27;@src/core/kafka-client/kafka-client.service&#x27;;
 import { AppConfigService } from &#x27;@core/app-config&#x27;;
 import { v4 as uuidv4 } from &#x27;uuid&#x27;;
-import { getErrorMessage } from &#x27;@src/shared/utils&#x27;;
-import { LogDto } from &#x27;@features/kafka-producer/dtos/log.dto&#x27;;
+import { getErrorMessage, handlerGeneralException } from &#x27;@src/shared/utils&#x27;;
+import { SendLogRequestDto } from &#x27;@features/kafka-producer/dtos/send-log-request.dto&#x27;;
 
 @Injectable()
 export class KafkaProducerService implements OnModuleInit {
@@ -439,28 +439,37 @@ export class KafkaProducerService implements OnModuleInit {
         }
     }
 
-    async send(data: LogDto): Promise&lt;RecordMetadata[]&gt; {
+    async send(data: SendLogRequestDto): Promise&lt;RecordMetadata[]&gt; {
         try {
             const topic &#x3D; this.config.get(&#x27;KAFKA&#x27;)?.producer?.topic;
+            const key &#x3D; data.key ? data.key : uuidv4();
+            delete data.key;
+
             this.logger.log(
-                &#x60;KafkaProducerService | send | start - send message to the the topic: ${topic} - message: ${JSON.stringify(data)}&#x60;,
+                &#x60;KafkaProducerService | send | start - send message to the the topic: ${topic} - key: ${key} - message: ${JSON.stringify(
+                    data,
+                )}&#x60;,
             );
 
             const response &#x3D; await this.producer.send({
                 topic: topic,
-                messages: [{ key: uuidv4(), value: JSON.stringify(data) }],
+                messages: [{ key, value: JSON.stringify(data) }],
             });
             this.logger.log(
-                &#x60;KafkaProducerService | send | end - send message to the the topic: ${topic} - message: ${JSON.stringify(data)}&#x60;,
+                &#x60;KafkaProducerService | send | end - send message to the the topic: ${topic} - key: ${key} - message: ${JSON.stringify(
+                    data,
+                )}&#x60;,
             );
             return response;
         } catch (err) {
             const topic &#x3D; this.config.get(&#x27;KAFKA&#x27;)?.producer?.topic;
 
             this.logger.error(
-                &#x60;KafkaProducerService | send | error - send message to the the topic: ${topic} - error: ${getErrorMessage(err)}&#x60;,
+                &#x60;KafkaProducerService | send | error - send message to the the topic: ${topic} - message: ${JSON.stringify(
+                    data,
+                )} - error: ${getErrorMessage(err)}&#x60;,
             );
-            throw err;
+            handlerGeneralException(err);
         }
     }
 }
