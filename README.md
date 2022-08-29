@@ -12,7 +12,7 @@
 ## Installation
 
 ```bash
-$ npm ci
+npm ci
 ```
 
 ## Important
