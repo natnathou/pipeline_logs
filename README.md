@@ -22,8 +22,8 @@ Why do I use Kafka rather than pub/sub?<br/>
  
  Why do I choose Elasticsearch:<br/>
   - Elasticsearch is no-sql, so it is perfect for storing unstructured data
-  - Elasticsearch is very powerfully for search, and very powerfully for data analyse, so it's perfect for logs
- But Mongo could be also a good choice
+  - Elasticsearch is very powerfully for search, and very powerfully for data analyse, so it's perfect for logs<br/>
+ (Mongo could be also a good choice)
 
 About support multi databases:<br/>
 It yes supports multi databases, we just have to inject a class dbService in LogProvider that satisfy the interface 'DbServiceInterface'
