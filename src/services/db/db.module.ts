@@ -14,7 +14,7 @@ const dbProvider = {
             imports: [AppConfigModule],
             useFactory: async (config: AppConfigService) => ({
                     node: config.get('ELASTICSEARCH')?.node,
-                },
+                }),
             inject: [AppConfigService],
         }),
     ],
