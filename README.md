@@ -10,7 +10,7 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
-No installation if you're running the app via docker if not you can run:
+No installation is needed if you're running the app via docker if not you can run:
 ```bash
 npm ci
 ```
