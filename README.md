@@ -11,36 +11,36 @@ This app is a pipeline that has two functionality:
  - get some logs from queue (kafka), and save them in database (elastic search), 
  - search logs by some text
  
-Why we choose queue rather than http?
-If our server offline, we lose the message, but with queue the message will still be in the queue until we acknowledge the pull
+Why I choose queue rather than http for logs injection?
+If our server is offline, we lose the messages, but with queue the messages will still be in the queue until we acknowledge them
 
 Why I use Kafka rather than pub/sub?
  - Kafka is open source
  - Kafka can implement schema registry
- - Kafka work with partition and parallelization works better
+ - Kafka work with partitions and parallelization works better
  - Kafka has retention process for messages, in contrasts with pub when we acknowledge the message, it goes
  
  Why I choose Elasticsearch:
   - Elasticsearch is no-sql so it is perfect for storing unstructured data
-  - Elasticsearch is very powerfull for search, and is very powerfull for data analyse so it's perfect for logs
+  - Elasticsearch is very powerfull for search, and very powerfull for data analyse so it's perfect for logs
  But Mongo could be also a good choise
 
 
 ## Installation
-No installation is needed if you're running the app via docker if not you can run:
+No installation is needed if you're running the app via docker. If not you can run:
 ```bash
 npm ci
 ```
 
 ## Important
-Be careful to increase your memory in docker desktop up to 4Gb to avoid elastic search container to crash
+Be careful to increase your memory in docker desktop up to 4Gb to avoid crashing of elastic search container
 
 ## Running the app
 ```bash
 docker compose up --build
 ```
 ## Postman
-You can import logs.postman_collection.json (in root project ) to postman to test this server
+You can import logs.postman_collection.json (from root project ) to postman to test this server
 
 ## Note
 I Implemented a producer for kafka just for the dev, so you have a way to produce message to kafka easily
