@@ -19,8 +19,9 @@ $ npm ci
 Be careful to increase your memory in docker desktop up to 4Gb to avoid elastic search container to crash
 
 ## Running the app
-
+```bash
 docker compose up --build
+```
 
 ## Architecture Design
 
