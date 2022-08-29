@@ -14,8 +14,10 @@
 ```bash
 $ npm ci
 ```
-## Description
+
+## Important
 Be careful to increase your memory in docker desktop up to 4Gb to avoid elastic search container to crash
+
 ## Running the app
 
 docker compose up --build
