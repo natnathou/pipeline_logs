@@ -12,18 +12,9 @@ const dbProvider = {
     imports: [
         ElasticsearchModule.registerAsync({
             imports: [AppConfigModule],
-            useFactory: async (config: AppConfigService) => {
-                console.log({
+            useFactory: async (config: AppConfigService) => ({
                     node: config.get('ELASTICSEARCH')?.node,
-                    auth: {
-                        username: config.get('ELASTICSEARCH')?.username,
-                        password: config.get('ELASTICSEARCH')?.password,
-                    },
-                });
-                return {
-                    node: config.get('ELASTICSEARCH')?.node,
-                };
-            },
+                },
             inject: [AppConfigService],
         }),
     ],
