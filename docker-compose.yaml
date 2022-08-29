@@ -1,0 +1,80 @@
+version: '2'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - '22181:2181'
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - '29092:29092'
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  kafka_ui:
+    image: provectuslabs/kafka-ui:latest
+    depends_on:
+      - kafka
+    ports:
+      - '8080:8080'
+    environment:
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+  esOne:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.2.1
+    container_name: esOne
+    environment:
+     - node.name=esOne
+     - cluster.name=es-cluster
+     - bootstrap.memory_lock=true
+     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+     - discovery.type=single-node
+     - network.host=0.0.0.0
+     - http.port=9200
+     - http.host=0.0.0.0
+     - transport.host=127.0.0.1
+     - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data05:/usr/share/elasticsearch/data
+    ports:
+      - '9200:9200'
+    restart: always
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - .:/app
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - '3000:3000'
+      - '9229:9229'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=dev
+    depends_on:
+      - esOne
+
+volumes:
+  data05:
+    driver: local
