@@ -7,7 +7,7 @@
 
 ## Description
 
-This app is a pipeline that has two functionalitys:
+This app is a pipeline that has two functionalities:
  - get some logs from queue (kafka), and save them in database (elastic search), 
  - search logs by some text
  
