@@ -3,8 +3,8 @@ import { Producer, RecordMetadata } from 'kafkajs';
 import { KafkaClientService } from '@src/core/kafka-client/kafka-client.service';
 import { AppConfigService } from '@core/app-config';
 import { v4 as uuidv4 } from 'uuid';
-import { getErrorMessage } from '@src/shared/utils';
-import { LogDto } from '@features/kafka-producer/dtos/log.dto';
+import { getErrorMessage, handlerGeneralException } from '@src/shared/utils';
+import { SendLogRequestDto } from '@features/kafka-producer/dtos/send-log-request.dto';
 
 @Injectable()
 export class KafkaProducerService implements OnModuleInit {
@@ -32,28 +32,37 @@ export class KafkaProducerService implements OnModuleInit {
         }
     }
 
-    async send(data: LogDto): Promise<RecordMetadata[]> {
+    async send(data: SendLogRequestDto): Promise<RecordMetadata[]> {
         try {
             const topic = this.config.get('KAFKA')?.producer?.topic;
+            const key = data.key ? data.key : uuidv4();
+            delete data.key;
+
             this.logger.log(
-                `KafkaProducerService | send | start - send message to the the topic: ${topic} - message: ${JSON.stringify(data)}`,
+                `KafkaProducerService | send | start - send message to the the topic: ${topic} - key: ${key} - message: ${JSON.stringify(
+                    data,
+                )}`,
             );
 
             const response = await this.producer.send({
                 topic: topic,
-                messages: [{ key: uuidv4(), value: JSON.stringify(data) }],
+                messages: [{ key, value: JSON.stringify(data) }],
             });
             this.logger.log(
-                `KafkaProducerService | send | end - send message to the the topic: ${topic} - message: ${JSON.stringify(data)}`,
+                `KafkaProducerService | send | end - send message to the the topic: ${topic} - key: ${key} - message: ${JSON.stringify(
+                    data,
+                )}`,
             );
             return response;
         } catch (err) {
             const topic = this.config.get('KAFKA')?.producer?.topic;
 
             this.logger.error(
-                `KafkaProducerService | send | error - send message to the the topic: ${topic} - error: ${getErrorMessage(err)}`,
+                `KafkaProducerService | send | error - send message to the the topic: ${topic} - message: ${JSON.stringify(
+                    data,
+                )} - error: ${getErrorMessage(err)}`,
             );
-            throw err;
+            handlerGeneralException(err);
         }
     }
 }
