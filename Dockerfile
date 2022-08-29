@@ -1,6 +1,5 @@
 FROM node:16.3.0-alpine
 WORKDIR '/app'
-COPY .npmrc .
 RUN npm i -g @nestjs/cli
 
 COPY package.json .
