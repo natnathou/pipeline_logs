@@ -11,21 +11,21 @@ This app is a pipeline that has two functionalities:
  - to get some logs from a queue (kafka), and save them in database (elastic search), 
  - to search logs by some text
  
-Why do I choose queue rather than http for logs injection?
+Why do I choose queue rather than http for logs injection?<br/>
 If our server is offline, we lose the messages, but with queue the messages will still be in the queue until we acknowledge them
 
-Why do I use Kafka rather than pub/sub?
+Why do I use Kafka rather than pub/sub?<br/>
  - Kafka is open source
  - Kafka can implement schema registry
  - Kafka work with partitions and parallelization works better
  - Kafka has retention process for messages, in contrasts with pub/sub when we acknowledge the message, it goes
  
- Why I choose Elasticsearch:
+ Why I choose Elasticsearch:<br/>
   - Elasticsearch is no-sql, so it is perfect for storing unstructured data
   - Elasticsearch is very powerfully for search, and very powerfully for data analyse, so it's perfect for logs
  But Mongo could be also a good choice
 
-About support multi databases:
+About support multi databases:<br/>
 It yes supports multi databases, we just have to inject a class dbService in LogProvider that satisfy the interface 'DbServiceInterface'
 
 
